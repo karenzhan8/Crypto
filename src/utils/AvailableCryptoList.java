@@ -59,8 +59,7 @@ public class AvailableCryptoList {
 				while (sc.hasNext()) {
 					inline += sc.nextLine();
 				}
-				sc.close();
-				System.out.println(inline);			
+				sc.close();		
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block e.printStackTrace();

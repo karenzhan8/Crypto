@@ -37,7 +37,6 @@ public class TradeStrategy {
 			result = new StrategyFactoryD();
 		}
 		
-		
 		execution = result.doStrategy(strategy, coins, prices, name);
 	// final format of TradeExecution: {name, strategy, action, coin, quantity, price}	
 		return execution.getExecution();

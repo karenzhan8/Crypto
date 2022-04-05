@@ -121,7 +121,6 @@ public class UserSelection {
 				//if there is no pre-existing array and strategy is not None, then create
 				//new entry in frequency list
 				current = new ArrayList<String>();
-				System.out.println(currBroker.getName() + currBroker.getStrategy() + !found + !currBroker.getStrategy().equals("None"));
 				
 				if (!found && !currBroker.getStrategy().equals("None")) {
 					current = new ArrayList<String>();
