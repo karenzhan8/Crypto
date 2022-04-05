@@ -32,16 +32,24 @@ import gui.MainUI;
 
 public class DataVisualizationCreator {
 	
+	/*
+	 *  outputs table and histogram onto mainUI
+	 *  @param tableData includes the data to be fed into the table display
+	 *  @param histogramData includes the data to be fed into the histogram
+	 */
 	public void createCharts(List<List<String>> tableData, List<List<String>> histogramData) {
 		createTableOutput(tableData);
 		createBar(histogramData);
 	}
 	
+	/*
+	 * outputs table displaying summary of trading actions onto mainUI
+	 * @param tradeActions contains the list of all buy/sell actions enacted in most recent trade
+	 */
 	private void createTableOutput(List<List<String>> tradeActions) {
-		// Dummy dates for demo purposes. These should come from selection menu
+		
 		Object[] columnNames = {"Trader","Strategy","Action", "CryptoCoin","Quantity","Price","Date"};
 		
-		// tradeActions format: {trader name, strategy, action, coin, quantity, price, date}
 		Object[][] data = new Object[tradeActions.size()][7];
 		for (int i=0; i < data.length; i++) {
 			List<String> currLine = tradeActions.get(i);
@@ -71,8 +79,11 @@ public class DataVisualizationCreator {
 		MainUI.getInstance().updateStats(scrollPane);
 	}
 	
+	/*
+	 * outputs histogram displaying frequency of each trading strategy onto MainUI
+	 * @param strategyFrequencies includes list of number of times each strategy has been enacted by each broker
+	 */
 	public void createBar(List<List<String>> strategyFrequencies) {
-		// strategyFrequenciesFormat: {{frequency, trader, strategy}, ...}
 		
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();	
 		for (int i=0; i < strategyFrequencies.size(); i++) {
