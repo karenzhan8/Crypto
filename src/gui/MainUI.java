@@ -212,7 +212,7 @@ public class MainUI extends JFrame implements ActionListener {
 		/* 
 		* performs trade by storing all current brokers in each row in a database, and performing a trade on each based on coins and strategy
 		* FACADE design enacted by sending all complex operations to other classes (i.e. executeTrade)
-		* complex back-end operations are masked, user only presented with "perform trade" button
+		* complex back-end operations are masked, user only presented with "perform trade" button and trade results
 		*/
 		if ("refresh".equals(command)) { 
 			// stores database of brokers
@@ -282,7 +282,11 @@ public class MainUI extends JFrame implements ActionListener {
 			}
 			
 		} else if ("Login".equals(command)) {
-			//verify that user credentials are correct
+			/* 
+			* verify that user credentials are correct
+			* FACADE pattern implemented, masking back-end operations required to verify username and password
+			* user input sent to User class for verification
+			*/
 			User info = User.getInstance();
 			
 			//get user input 
