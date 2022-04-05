@@ -38,7 +38,7 @@ import utils.UserSelection;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-
+// renders charts
 import utils.DataVisualizationCreator;
 
 public class MainUI extends JFrame implements ActionListener {
