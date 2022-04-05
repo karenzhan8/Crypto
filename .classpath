@@ -6,8 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/robertoarmena/Downloads/jfreechart-1.0.19.jar"/>
-	<classpathentry kind="lib" path="/Users/robertoarmena/Downloads/gson-2.6.2.jar"/>
-	<classpathentry kind="lib" path="/Users/robertoarmena/Downloads/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zoed1/Downloads/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zoed1/Downloads/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zoed1/Downloads/gson-2.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

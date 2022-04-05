@@ -8,7 +8,7 @@ public class StrategyA extends Strategy {
 		
 		super (strategy, coins, prices, name);
 		
-		List<String> execution = new ArrayList<>();
+		List<String> execution = new ArrayList<String>();
 		DataFetcher coinGecko = new DataFetcher();
 		
 		execution.add(name);
