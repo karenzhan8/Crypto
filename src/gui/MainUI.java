@@ -292,32 +292,11 @@ public class MainUI extends JFrame implements ActionListener {
 		
 		stats.removeAll();
 		DataVisualizationCreator creator = new DataVisualizationCreator();
-	// ---------------- TESTING PURPOSES ONLY (TO DELETE FOR FINAL PRODUCT) -------------------------
-		List<List<String>> tableList = new ArrayList<List<String>>();
-		List<String> tradeData = new ArrayList<String>();
-		tradeData.add("taylor");
-		tradeData.add("strategy-a");
-		tradeData.add("buy");
-		tradeData.add("BTC");
-		tradeData.add("300");
-		tradeData.add("1.00");
-		tradeData.add("03-06-2002");
-		tableList.add(tradeData);
 		
-		List<List<String>> histoList = new ArrayList<List<String>>();
-		List<String> freqData = new ArrayList<String>();
-		freqData.add("6");
-		freqData.add("Trader-1");
-		freqData.add("Strategy-A");
-		histoList.add(freqData);
-		
-		List<String> freqData2 = new ArrayList<String>();
-		freqData2.add("5");
-		freqData2.add("Trader-2");
-		freqData2.add("Strategy-B");
-		histoList.add(freqData2);
+		List<List<String>> histoList = UserSelection.getFrequencies();
 		
 		creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
+		
 		} else if ("addTableRow".equals(command)) {
 			dtm.addRow(new String[3]); 
 		} else if ("remTableRow".equals(command)) {
