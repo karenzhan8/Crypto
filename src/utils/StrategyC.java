@@ -3,6 +3,7 @@ package utils;
 import java.util.*;
 
 public class StrategyC extends Strategy {
+	
 	public StrategyC(String[] coins, List<Double> prices, String name, String strategy) {
 
 		super (strategy, coins, prices, name);
@@ -44,6 +45,7 @@ public class StrategyC extends Strategy {
 				execution.add(failedTrade.get(i));
 			}
 		}
+		execution.add(date());
 		setExecution(execution);
 	}
 }

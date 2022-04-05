@@ -42,6 +42,7 @@ public class StrategyD extends Strategy {
 				execution.add(failedTrade.get(i));
 			}
 		}
+		execution.add(date());
 		setExecution(execution);
 	}
 }
