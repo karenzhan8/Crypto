@@ -2,7 +2,20 @@ package utils;
 
 import java.util.*;
 
+/**
+ * 
+ * @author zoed1
+ * Implementation of factory method for trade strategy execution: Strategy D
+ *
+ */
 public class StrategyD extends Strategy {
+	/**
+	 * Constructor: If price of ADA > price FTM, buy 100 FTM, else buy ADA
+	 * @param coins
+	 * @param prices
+	 * @param name
+	 * @param strategy
+	 */
 	public StrategyD(String[] coins, List<Double> prices, String name, String strategy) {
 		
 		super (strategy, coins, prices, name);
