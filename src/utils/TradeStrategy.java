@@ -48,7 +48,7 @@ public class TradeStrategy {
 	 * @return today's date
 	 */
 	private static String date() { 
-		Format f = new SimpleDateFormat("MM-dd-20yy");
+		Format f = new SimpleDateFormat("dd-MM-20yy");
 		String strDate = f.format(new Date());
 		return (strDate);
 	}

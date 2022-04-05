@@ -19,7 +19,7 @@ public abstract class Strategy {
 	//class returns today's date such that when prices are added to String array coin, 
 	//coin prices are up to date and accurate
 	protected static String date() {
-		Format f = new SimpleDateFormat("MM-dd-20yy");
+		Format f = new SimpleDateFormat("dd-MM-20yy");
 		String strDate = f.format(new Date());
 		return (strDate);
 	}
