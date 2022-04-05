@@ -91,11 +91,12 @@ public class UserSelection {
      */
 	public static void setFrequencies(UserSelection traderList) {
 		TradeStrategy trader = new TradeStrategy(); // used to perform trades
-		boolean found = false;
+		boolean found;
 		int update;
 		ArrayList<String> current;
 		
-		for (int i=0; i < traderList.getNumBrokers(); i++) {
+		for (int i = 0; i < traderList.getNumBrokers(); i++) {
+			found = false;
 			Broker currBroker = traderList.getBrokerList().get(i);
 			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
 			
@@ -120,6 +121,8 @@ public class UserSelection {
 				//if there is no pre-existing array and strategy is not None, then create
 				//new entry in frequency list
 				current = new ArrayList<String>();
+				System.out.println(currBroker.getName() + currBroker.getStrategy() + !found + !currBroker.getStrategy().equals("None"));
+				
 				if (!found && !currBroker.getStrategy().equals("None")) {
 					current = new ArrayList<String>();
 					current.add(Integer.toString(1));
