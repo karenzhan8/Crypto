@@ -22,8 +22,10 @@ public class ExecuteTrade {
 	// executes one round of trading, iterating through each broker and updating cumulative trades for each buy/sell action performed
 	public void performTrade(UserSelection traderList) {
 		
+		Broker currBroker;
+		
 		for (int i=0; i < traderList.getNumBrokers(); i++) {
-			Broker currBroker = traderList.getBrokerList().get(i);
+			currBroker = traderList.getBrokerList().get(i);
 			
 			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
 		// size == 7 means a buy/sell action was enacted (ensures no empty rows are rendered into the table)
