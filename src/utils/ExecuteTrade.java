@@ -29,7 +29,8 @@ public class ExecuteTrade {
 			
 			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
 		// size == 7 means a buy/sell action was enacted (ensures no empty rows are rendered into the table)
-			if (tradeResult.size() == 7) {
+		//
+			if (tradeResult.size() == 7 && tradeResult.get(2) != "Fail") {
 				cumulativeTrades.add(tradeResult);
 			};
 		};
