@@ -33,7 +33,7 @@ import gui.MainUI;
 /**
  * mechanism behind displaying table and map
  * utilizes singleton design pattern
- * is an OBSERVER of the MainUI class
+ * is an OBSERVER of the UpdateData class
  */
 public class DataVisualizationCreator implements Observer{
 	private static UpdateData subject;
@@ -47,18 +47,28 @@ public class DataVisualizationCreator implements Observer{
 	public DataVisualizationCreator (UpdateData subject) {
 		this.subject = subject;
 		subject.attach(this);
-		
-		//singleton design pattern
-		if (instance == null) {
-			instance = new DataVisualizationCreator(this.subject);
-		}
 	}
 	
+	/**
+	 * implements singleton design pattern
+	 * @return instance
+	 */
+	public static DataVisualizationCreator getInstance() {
+		if (instance == null) {
+			instance = new DataVisualizationCreator(subject);
+		}
+		return instance;
+	}
 	
+	/**
+	 * calls method to draw histo and table
+	 * @param subject
+	 * @param tableData
+	 * @param histogramData
+	 */
 	@Override
 	public void update(Subject subject, List<List<String>> tableData, List<List<String>> histogramData) {
 		createCharts(tableData, histogramData);
-		
 	}
 	
 	/**

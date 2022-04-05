@@ -9,9 +9,15 @@ import java.util.*;
  * 
  */
 public abstract class Strategy {
-	
 	private List<String> action;
 	
+	/**
+	 * Constructor
+	 * @param strategy
+	 * @param coins
+	 * @param prices
+	 * @param name
+	 */
 	public Strategy(String strategy, String[] coins, List<Double> prices, String name) {
 		action = new ArrayList<String>();
 	}
@@ -24,6 +30,10 @@ public abstract class Strategy {
 		return (strDate);
 	}
 	
+	/**
+	 * Trade performed if the conditions for other strategies not met
+	 * @return list of action, coin, quantity, price
+	 */
 	protected List<String> FailTrade() {
 		List<String> failAction = new ArrayList<>();
 		failAction.add("Fail");
@@ -33,10 +43,18 @@ public abstract class Strategy {
 		return failAction;
 	}
 	
+	/**
+	 * sets execution of trade
+	 * @param trade
+	 */
 	public void setExecution(List<String> trade) {
 		action = trade;
 	}
 	
+	/** 
+	 * getter returns execution of trade
+	 * @return action
+	 */
 	public List<String> getExecution() {
 		return action;
 	}

@@ -210,7 +210,7 @@ public class MainUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
-		/* 
+		/**
 		* performs trade by storing all current brokers in each row in a database, and performing a trade on each based on coins and strategy
 		* FACADE design enacted by sending all complex operations to other classes (i.e. executeTrade)
 		* complex back-end operations are masked, user only presented with "perform trade" button and trade results
@@ -262,12 +262,14 @@ public class MainUI extends JFrame implements ActionListener {
 			
 			stats.removeAll();
 			
+			//add observer (DataVisualizationCreator) to subject (UpdateData)
+			//draws table and histo
 			UpdateData updater = new UpdateData();
+			DataVisualizationCreator creator = new DataVisualizationCreator(updater);
+			updater.attach(creator);
 			
 			//set frequencies so histogram can be displayed
 			UserSelection.setFrequencies(brokerDatabase);
-			
-			//get frequency data from user selection class
 			List<List<String>> histoList = UserSelection.getFrequencies();
 			
 			//notify OBSERVERs that trading data is updated 
