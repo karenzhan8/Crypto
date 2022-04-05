@@ -28,8 +28,7 @@ public class ExecuteTrade {
 			currBroker = traderList.getBrokerList().get(i);
 			
 			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
-		// size == 7 means a buy/sell action was enacted (ensures no empty rows are rendered into the table)
-		//
+		// conditionals ensure item is only added to cumulative trades if an actual buy/sell action was enacted
 			if (tradeResult.size() == 7 && tradeResult.get(2) != "Fail") {
 				cumulativeTrades.add(tradeResult);
 			};
