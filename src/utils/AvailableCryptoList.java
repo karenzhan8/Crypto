@@ -137,7 +137,7 @@ public class AvailableCryptoList {
 	 * returns ticker code for cryptocoin
 	 * @param tickerName
 	 * @return ticker 
-	 */
+	 */   
 	public String getCryptoIDfromTicker(String tickerName) {
 		return tickerIDMap.get(tickerName.toLowerCase());
 	}
