@@ -3,6 +3,9 @@ package utils;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Class used to verify user in the login 
+ */
 public class User {
 	private static User instance;
 	
@@ -10,6 +13,9 @@ public class User {
 		//singleton design pattern
 	}
 	
+	/**
+	 * Class that creates a global point of access to User using singleton design pattern  
+	 */
 	public static User getInstance() {
 		if (instance == null) {
 			instance = new User();
@@ -17,6 +23,12 @@ public class User {
 		return instance;
 	}
 	
+	/**
+	 * verifies user info
+	 * @param user
+	 * @param pass
+	 * @return		true if match and false if not a match or FileNotFoundException is thrown
+	 */
 	public boolean verify (String user, String pass) {
 		try {
 			//read input from file
