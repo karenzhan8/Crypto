@@ -5,6 +5,10 @@ import java.util.List;
 
 import gui.MainUI;
 
+/**
+ * communicates with GUI. Allows users to add brokers and store broker data
+ * uses singleton design pattern
+ */
 public class UserSelection {
 	private static UserSelection instance;
 	
@@ -15,7 +19,9 @@ public class UserSelection {
 	
 	private static List<List<String>> frequency = new ArrayList<List<String>>();
 		
-	//implementing a singleton design pattern 
+	/**
+	 * Class that creates a global point of access to UserSelection using singleton design pattern  
+	 */ 
 	private UserSelection getInstance() {
 		if (instance == null) {
 			instance = new UserSelection();
@@ -24,6 +30,12 @@ public class UserSelection {
 		return instance;
 	}
 	
+	/**
+	 * Class to check if broker is already in the broker list
+	 * @param brokerList	the list of brokers
+	 * @param name			the name of the broker we want to check if in list
+	 * @return				true if in list and false if not in list
+	 */
 	private static boolean containsBroker (ArrayList<Broker> brokerList, String name) {
     	for (int i = 0; i < brokerList.size(); i++) {
     		if (brokerList.get(i).getName().equals(name)) {
@@ -32,7 +44,13 @@ public class UserSelection {
     	}
     	return false;
     }
-	
+	/**
+	 * Class to add a broker
+	 * @param name		name of the broker
+	 * @param strategy	strategy for broker
+	 * @param coinList	list of coins for broker
+	 * @return		true if successfully added and false is not added 
+	 */
 	public boolean addBroker(String name, String strategy, String[] coinList) {
 		List<String> current = null;
 		int update;
@@ -80,33 +98,42 @@ public class UserSelection {
 		}
 	}
 	
-	public void removeBroker(String name) {
-		if (brokerList.contains(name)) {//check if broker is in list
-			int index = brokerList.indexOf(name);
-			strategyList.remove(index);
-			coinsList.remove(index);
-			brokerList.remove(index);
-			numBrokers--;
-		} else {
-			System.out.println("Broker not in list");
-		}
-	}
-	
+	/**
+	 * getter class for brokerList
+	 * @return brokerList
+	*/
     public ArrayList<Broker> getBrokerList() {
         return brokerList;
     }
+	
+	/**
+     * getter class for strategyList
+     * @return strategyList
+     */
     public ArrayList<String> getStrategyList() {
         return strategyList;
     }
     
+	/**
+     * getter class for coinsList
+     * @return coinsList
+     */
     public ArrayList<String[]> getCoinLists() {
         return coinsList;
     }
 	
+	/**
+     * getter class for number of brokers
+     * @return numBrokers
+     */
     public int getNumBrokers() {
 	    return numBrokers;
     }   
     
+	/**
+     * getter class for frequencies
+     * @return frequency
+     */
     public static List<List<String>> getFrequencies() {
     	return frequency;
     }
