@@ -2,7 +2,21 @@ package utils;
 
 import java.util.*;
 
+/**
+ * 
+ * @author zoed1
+ * Implementation of factory method for trade strategy execution: Strategy C
+ *
+ */
 public class StrategyC extends Strategy {
+
+	/**
+	 *  Constructor: If price of ETH > 3800 & price ADA < 1 -> buy 200 FTM, else sell 500 ADA
+	 * @param coins
+	 * @param prices
+	 * @param name
+	 * @param strategy
+	 */
 	public StrategyC(String[] coins, List<Double> prices, String name, String strategy) {
 
 		super (strategy, coins, prices, name);
