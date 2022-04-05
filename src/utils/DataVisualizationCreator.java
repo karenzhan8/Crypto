@@ -33,6 +33,7 @@ import gui.MainUI;
 /**
  * mechanism behind displaying table and map
  * utilizes singleton design pattern
+ * is an OBSERVER of the MainUI class
  */
 public class DataVisualizationCreator {
 	private static DataVisualizationCreator instance;

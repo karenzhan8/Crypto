@@ -44,6 +44,7 @@ import utils.DataVisualizationCreator;
 /**
  * main method
  * utilizes singleton design pattern
+ * is the SUBJECT for the DataVisualizationCreator class
  */
 public class MainUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -262,7 +263,7 @@ public class MainUI extends JFrame implements ActionListener {
 			//get frequency data from user selection class
 			List<List<String>> histoList = UserSelection.getFrequencies();
 			
-			//draw histogram
+			//notify OBSERVER of trading data
 			creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
 			
 		//if user would like another row
