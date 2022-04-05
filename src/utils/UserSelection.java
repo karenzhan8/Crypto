@@ -44,59 +44,6 @@ public class UserSelection {
     	}
     	return false;
     }
-	/**
-	 * Class to add a broker
-	 * @param name		name of the broker
-	 * @param strategy	strategy for broker
-	 * @param coinList	list of coins for broker
-	 * @return		true if successfully added and false is not added 
-	 */
-	public boolean addBroker(String name, String strategy, String[] coinList) {
-		List<String> current = null;
-		int update;
-		boolean found = false;
-		
-		//either you find it or you don't 
-		//check if it's there
-		for (int i = 0; i < frequency.size(); i++) {
-			current = frequency.get(i);
-			
-			if (current.get(1).equals(name) && current.get(2).equals(strategy)) {
-				found = true;
-				
-				update = Integer.parseInt(current.get(0));
-				update++;
-				current.set(0, Integer.toString(update));
-				
-				break;
-			}
-		}
-	
-		//if there is no pre-existing array and strategy is not None
-		if (!found && !strategy.equals("None")) {
-			current = new ArrayList<String>();
-			current.add(Integer.toString(1));
-			current.add(name);
-			current.add(strategy);
-			
-			frequency.add(current);
-		}
-		
-		if (!containsBroker(brokerList, name)) { //if broker is not in list yet
-			Broker newBroker = new Broker(name, strategy, coinList);
-			
-			brokerList.add(newBroker);
-			strategyList.add(strategy);
-			numBrokers++;
-	        coinsList.add(coinList);
-	        
-	        return true;
-	        
-		} else {
-			System.out.println("Broker already in list");
-			return false;
-		}
-	}
 	
 	/**
 	 * getter class for brokerList
@@ -137,4 +84,73 @@ public class UserSelection {
     public static List<List<String>> getFrequencies() {
     	return frequency;
     }
+    
+    /**
+     * set frequencies of trades in this trading round, based on user selection 
+     * @param traderList
+     */
+	public static void setFrequencies(UserSelection traderList) {
+		TradeStrategy trader = new TradeStrategy(); // used to perform trades
+		boolean found = false;
+		int update;
+		ArrayList<String> current;
+		
+		for (int i=0; i < traderList.getNumBrokers(); i++) {
+			Broker currBroker = traderList.getBrokerList().get(i);
+			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
+			
+			// size == 7 means a buy/sell action was enacted (ensures no faulty trades are shown in histo)
+			if (tradeResult.size() == 7) {
+				//determine if an entry in frequency already exists
+				for (int j = 0; j < frequency.size(); j++) {
+					if (frequency.get(j).get(1).equals(currBroker.getName()) && frequency.get(j).get(2).equals(currBroker.getStrategy())) {
+						found = true;
+						
+						update = Integer.parseInt(frequency.get(j).get(0));
+						update++;
+						frequency.get(j).set(0, Integer.toString(update));
+						
+						break;
+					}
+				}
+				
+				current = new ArrayList<String>();
+				
+				//if there is no pre-existing array and strategy is not None
+				if (!found && !currBroker.getStrategy().equals("None")) {
+					current = new ArrayList<String>();
+					current.add(Integer.toString(1));
+					current.add(currBroker.getName());
+					current.add(currBroker.getStrategy());
+					
+					frequency.add(current);
+				}	
+			}
+		}		
+	}
+	
+	/**
+	 * Class to add a broker
+	 * @param name		name of the broker
+	 * @param strategy	strategy for broker
+	 * @param coinList	list of coins for broker
+	 * @return		true if successfully added and false is not added 
+	 */
+	
+	public boolean addBroker(String name, String strategy, String[] coinList) {
+		if (!containsBroker(brokerList, name)) { //if broker is not in list yet
+			Broker newBroker = new Broker(name, strategy, coinList);
+			
+			brokerList.add(newBroker);
+			strategyList.add(strategy);
+			numBrokers++;
+	        coinsList.add(coinList);
+	        
+	        return true;
+	        
+		} else {
+			System.out.println("Broker already in list");
+			return false;
+		}
+	}
 }

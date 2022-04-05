@@ -293,6 +293,7 @@ public class MainUI extends JFrame implements ActionListener {
 		stats.removeAll();
 		DataVisualizationCreator creator = new DataVisualizationCreator();
 		
+		UserSelection.setFrequencies(brokerDatabase);
 		List<List<String>> histoList = UserSelection.getFrequencies();
 		
 		creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
