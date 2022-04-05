@@ -33,7 +33,7 @@ public class ExecuteTrade {
 			
 			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
 		// conditionals ensure item is only added to cumulative trades if an actual buy/sell action was enacted
-			if (tradeResult.size() == 7 && tradeResult.get(2) != "Fail") {
+			if (tradeResult.size() == 7) {
 				cumulativeTrades.add(tradeResult);
 			};
 		};
