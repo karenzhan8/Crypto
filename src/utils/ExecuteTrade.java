@@ -22,6 +22,7 @@ public class ExecuteTrade {
 	
 	/*
 	 *  executes one round of trading, iterating through each broker and updating cumulative trades for each buy/sell action performed
+	 *  @param traderList is the list of all current traders in the system
 	 */
 	public void performTrade(UserSelection traderList) {
 		
@@ -39,7 +40,7 @@ public class ExecuteTrade {
 	}
 	
 	/*
-	 * returns the list of cumulative trading history
+	 * @return the list of cumulative trading history
 	 */
 	
 	public List<List<String>> getCumulativeTrades () {
