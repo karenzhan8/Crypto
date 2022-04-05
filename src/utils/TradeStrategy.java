@@ -7,6 +7,13 @@ import java.util.*;
 
 public class TradeStrategy {
 	
+	/*
+	 *  performs a trade on one broker
+	 *  @param strategy indicates broker's strategy type
+	 *  @param coins includes list of coins broker is interested in
+	 *  @param name is the broker's name
+	 *  @return summary of trading results (i.e. coins bought/sold, quantity, price, and date of trade)
+	 */
 	public List<String> getExecution(String strategy, String[] coins, String name) { //selection object
 		List<String> TradeExecution = new ArrayList<>();
 		TradeExecution.add(name);
@@ -52,15 +59,18 @@ public class TradeStrategy {
 		return TradeExecution;
 	}
 	
-	//class returns today's date such that when prices are added to String array coin, 
-	//coin prices are up to date and accurate
+	/*
+	 * @return today's date such that when prices are added to String array coin, coin prices are up to date and accurate
+	 */
 	private static String date() {
 		Format f = new SimpleDateFormat("MM-dd-20yy");
 		String strDate = f.format(new Date());
 		return (strDate);
 	}
 	
-	//A: if Bitcoin (BTC) > 46k and Ethereum (ETH) < 3800 then buy 800 units Cardano (ADA), else sell 2 Bitcoin (BTC)
+	/*
+	 * A: if Bitcoin (BTC) > 46k and Ethereum (ETH) < 3800 then buy 800 units Cardano (ADA), else sell 2 Bitcoin (BTC)
+	 */
 	private static List<String> StrategyA(String[] coins, List<Double> prices) {
 		List<String> execution = new ArrayList<String>();
 		DataFetcher coinGecko = new DataFetcher();
@@ -96,7 +106,9 @@ public class TradeStrategy {
 		return execution;
 	}
 
-	//B: if Cardano (ADA) > $1 then buy 10 LUNA, else sell 3 Bitcoin
+	/*
+	 * B: if Cardano (ADA) > $1 then buy 10 LUNA, else sell 3 Bitcoin
+	 */
 	private static List<String> StrategyB(String[] coins, List<Double> prices) {
 		List<String> execution = new ArrayList<String>();
 		DataFetcher coinGecko = new DataFetcher();
@@ -132,7 +144,10 @@ public class TradeStrategy {
 		}
 		return execution;
 	}
-	//C: if Ethereum (ETH) > $3800 and Cardano (ADA) < $1 buy 200 Fantom (FTM), else sell 500 Cardano (ADA)
+	
+	/*
+	 * C: if Ethereum (ETH) > $3800 and Cardano (ADA) < $1 buy 200 Fantom (FTM), else sell 500 Cardano (ADA)
+	 */
 	private static List<String> StrategyC(String[] coins, List<Double> prices) {
 		List<String> execution = new ArrayList<String>();
 		DataFetcher coinGecko = new DataFetcher();
@@ -168,7 +183,9 @@ public class TradeStrategy {
 		return execution;
 	}
 	
-	//D: if price of Cardano (ADA) > price Fantom (FTM), then buy 100 FTM, else buy 100 Cardano
+	/*
+	 * D: if price of Cardano (ADA) > price Fantom (FTM), then buy 100 FTM, else buy 100 Cardano
+	 */
 	private static List<String> StrategyD(String[] coins, List<Double> prices) {
 		List<String> execution = new ArrayList<String>();
 		DataFetcher coinGecko = new DataFetcher();
@@ -202,6 +219,9 @@ public class TradeStrategy {
 		return execution;
 	}
 	
+	/*
+	 * indicates that no buy/sell action was enacted
+	 */
 	private static List<String> FailTrade() {
 		List<String> execution = new ArrayList<String>();
 		execution.add("Fail");
