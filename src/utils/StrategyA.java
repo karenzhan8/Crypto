@@ -2,26 +2,12 @@ package utils;
 
 import java.util.*;
 
-/**
- * 
- * @author zoed1
- * Implementation of factory method for trade strategy execution: Strategy A
- *
- */
 public class StrategyA extends Strategy {
 	
-	/**
-	 *  Constructor: If price of BTC > 46000 & price ETH < 3800 -> buy 800 ADA, else sell 2 BTC
-	 * @param coins
-	 * @param prices
-	 * @param name
-	 * @param strategy
-	 */
 	public StrategyA(String[] coins, List<Double> prices, String name, String strategy) {
 		
 		super (strategy, coins, prices, name);
 		
-		// add all parts of action to list for use in table log
 		List<String> execution = new ArrayList<>();
 		DataFetcher coinGecko = new DataFetcher();
 		
@@ -53,7 +39,7 @@ public class StrategyA extends Strategy {
 				execution.add("2");
 				execution.add(Double.toString(Bitcoin));
 			}
-		} else { // list entries if trade fails
+		} else {
 			List<String> failedTrade = FailTrade();
 			for(int i = 0; i < failedTrade.size(); i++) {
 				execution.add(failedTrade.get(i));
@@ -61,7 +47,7 @@ public class StrategyA extends Strategy {
 		}
 		
 		execution.add(date());
-		setExecution(execution); // set the Strategy class list to results of Strategy A
+		setExecution(execution);
 	}
 	
 }
