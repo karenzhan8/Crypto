@@ -41,6 +41,10 @@ import javax.swing.JLabel;
 // renders charts
 import utils.DataVisualizationCreator;
 
+/**
+ * main method
+ * utilizes singleton design pattern
+ */
 public class MainUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
@@ -78,14 +82,20 @@ public class MainUI extends JFrame implements ActionListener {
 	// stores list of cumulative trades
 	ExecuteTrade cumulativeTrades = new ExecuteTrade();
 
-	//utilize Singleton design pattern to create only one instance of MainUI
+	/**
+	 * utilize Singleton design pattern to create only one instance of MainUI
+	 * @return instance
+	 */
 	public static MainUI getInstance() {
-		if (instance == null)
+		if (instance == null) {
 			instance = new MainUI();
-
+		}
 		return instance;
 	}
 
+	/**
+	 * Constructor, main method and main UI for user
+	 */
 	private MainUI() {
 		// Set window title
 		super("Crypto Trading Tool");
@@ -119,59 +129,25 @@ public class MainUI extends JFrame implements ActionListener {
 		button.addActionListener(this);
 		loginPanel.add(button);
 		
+		//allow user to log in
 		loginFrame.setLocationRelativeTo(null);
 		loginFrame.setVisible(true);
 		loginFrame.setAlwaysOnTop(true);
 		
 		// Set top bar
 		JPanel north = new JPanel();
-
-//		north.add(strategyList);
-//
-//		// Set bottom bar
-//		JLabel from = new JLabel("From");
-//		UtilDateModel dateModel = new UtilDateModel();
-//		Properties p = new Properties();
-//		p.put("text.today", "Today");
-//		p.put("text.month", "Month");
-//		p.put("text.year", "Year");
-//		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, p);
-//		@SuppressWarnings("serial")
-//		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new AbstractFormatter() {
-//			private String datePatern = "dd/MM/yyyy";
-//
-//			private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePatern);
-//
-//			@Override
-//			public Object stringToValue(String text) throws ParseException {
-//				return dateFormatter.parseObject(text);
-//			}
-//
-//			@Override
-//			public String valueToString(Object value) throws ParseException {
-//				if (value != null) {
-//					Calendar cal = (Calendar) value;
-//					return dateFormatter.format(cal.getTime());
-//				}
-//
-//				return "";
-//			}
-//		});
-
 		JButton trade = new JButton("Perform Trade");
 		trade.setActionCommand("refresh");
 		trade.addActionListener(this);
 
 		JPanel south = new JPanel();
-		
 		south.add(trade);
 
 		dtm = new DefaultTableModel(new Object[] { "Trading Client", "Coin List", "Strategy Name" }, 0);
 		table = new JTable(dtm);
-		// table.setPreferredSize(new Dimension(600, 300));
+		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Trading Client Actions",
-				TitledBorder.CENTER, TitledBorder.TOP));
+		scrollPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Trading Client Actions", TitledBorder.CENTER, TitledBorder.TOP));
 		Vector<String> strategyNames = new Vector<String>();
 		strategyNames.add("None");
 		strategyNames.add("Strategy-A");
@@ -191,11 +167,8 @@ public class MainUI extends JFrame implements ActionListener {
 		scrollPane.setPreferredSize(new Dimension(800, 300));
 		table.setFillsViewportHeight(true);
 		
-
 		JPanel east = new JPanel();
-//		east.setLayout();
 		east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
-//		east.add(table);
 		east.add(scrollPane);
 		
 		JPanel buttons = new JPanel();
@@ -203,8 +176,6 @@ public class MainUI extends JFrame implements ActionListener {
 		buttons.add(addRow);
 		buttons.add(remRow);
 		east.add(buttons);
-//		east.add(selectedTickerListLabel);
-//		east.add(selectedTickersScrollPane);
 
 		// Set charts region
 		JPanel west = new JPanel();
@@ -218,7 +189,6 @@ public class MainUI extends JFrame implements ActionListener {
 		getContentPane().add(east, BorderLayout.EAST);
 		getContentPane().add(west, BorderLayout.CENTER);
 		getContentPane().add(south, BorderLayout.SOUTH);
-//		getContentPane().add(west, BorderLayout.WEST);
 	}
 
 	public void updateStats(JComponent component) {
@@ -236,7 +206,9 @@ public class MainUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-		if ("refresh".equals(command)) { // after perform trade, then start getting each selection broker
+		
+		// after perform trade, then start getting each selection broker
+		if ("refresh".equals(command)) { 
 			// stores database of brokers
 			UserSelection brokerDatabase = new UserSelection();
 			
@@ -247,12 +219,7 @@ public class MainUI extends JFrame implements ActionListener {
 					return;
 				}
 				String traderName = traderObject.toString();
-				/*
-				if (brokerDatabase.inDatabase(traderName) == null) {
-					JOptionPane.showMessageDialog(this, "please change your Trader name on line " + (count + 1) );
-					return;// CHECK HERE IF NAME MATCHES A PREVIOUS BROKER NAME
-				};
-				*/
+
 				Object coinObject = dtm.getValueAt(count, 1); 
 				if (coinObject == null) {
 					JOptionPane.showMessageDialog(this, "please fill in cryptocoin list on line " + (count + 1) );
@@ -283,32 +250,40 @@ public class MainUI extends JFrame implements ActionListener {
 					return;
 					
 				}
-		}
-		
-		cumulativeTrades.performTrade(brokerDatabase);
-		
-		System.out.println(cumulativeTrades.getCumulativeTrades().size());
-		System.out.println(brokerDatabase.getNumBrokers());
-		
-		stats.removeAll();
-		DataVisualizationCreator creator = new DataVisualizationCreator();
-		
-		UserSelection.setFrequencies(brokerDatabase);
-		List<List<String>> histoList = UserSelection.getFrequencies();
-		
-		creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
-		
+			}
+			
+			cumulativeTrades.performTrade(brokerDatabase);
+			
+			System.out.println(cumulativeTrades.getCumulativeTrades().size());
+			System.out.println(brokerDatabase.getNumBrokers());
+			
+			stats.removeAll();
+			DataVisualizationCreator creator = new DataVisualizationCreator();
+			
+			//set frequencies so histogram can be displayed
+			UserSelection.setFrequencies(brokerDatabase);
+			
+			//get frequency data from user selection class
+			List<List<String>> histoList = UserSelection.getFrequencies();
+			
+			//draw histogram
+			creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
+			
+		//if user would like another row
 		} else if ("addTableRow".equals(command)) {
 			dtm.addRow(new String[3]); 
+			
 		} else if ("remTableRow".equals(command)) {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1) {
 				dtm.removeRow(selectedRow); // connect to remove the selected row data from here (THIS IS PERFORMED AFTER TRADE BUTTON HIT)
 			}
+			
 		} else if ("Login".equals(command)) {
 			//verify that user credentials are correct
 			User info = User.getInstance();
 			
+			//get user input 
 			String user = username.getText();
 			String pass = password.getText();
 
@@ -320,6 +295,7 @@ public class MainUI extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Log in failed, system will terminate!");
 			}	
 			
+			//hide log in window, whether or not user log in was successful
 			loginFrame.setVisible(false);
 			
 			if (credentials) {
