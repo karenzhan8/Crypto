@@ -242,7 +242,6 @@ public class MainUI extends JFrame implements ActionListener {
 					}
 				}
 				String strategyName = strategyObject.toString(); // strategy name string
-				System.out.println(traderName + " " + Arrays.toString(coinNames) + " " + strategyName); // could use here to make selection object
 				boolean add = brokerDatabase.addBroker(traderName, strategyName, coinNames);
 				
 				if (!add) {
@@ -253,9 +252,6 @@ public class MainUI extends JFrame implements ActionListener {
 			}
 			
 			cumulativeTrades.performTrade(brokerDatabase);
-			
-			System.out.println(cumulativeTrades.getCumulativeTrades().size());
-			System.out.println(brokerDatabase.getNumBrokers());
 			
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
