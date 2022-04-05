@@ -30,13 +30,37 @@ import org.jfree.data.time.TimeSeriesCollection;
 
 import gui.MainUI;
 
+/**
+ * mechanism behind displaying table and map
+ * utilizes singleton design pattern
+ */
 public class DataVisualizationCreator {
+	private static DataVisualizationCreator instance;
 	
+	/**
+	 * mechanism for singleton design pattern
+	 */
+	private static DataVisualizationCreator getInstance() {
+		if (instance == null) {
+			instance = new DataVisualizationCreator();
+		}
+		return instance;
+	}
+	
+	/**
+	 * creates chart outlining trade data 
+	 * @param tableData
+	 * @param histogramData
+	 */
 	public void createCharts(List<List<String>> tableData, List<List<String>> histogramData) {
 		createTableOutput(tableData);
 		createBar(histogramData);
 	}
 	
+	/**
+	 * creates table output for top-left table in MainUI
+	 * @param tradeActions
+	 */
 	private void createTableOutput(List<List<String>> tradeActions) {
 		// Dummy dates for demo purposes. These should come from selection menu
 		Object[] columnNames = {"Trader","Strategy","Action", "CryptoCoin","Quantity","Price","Date"};
@@ -71,6 +95,10 @@ public class DataVisualizationCreator {
 		MainUI.getInstance().updateStats(scrollPane);
 	}
 	
+	/**
+	 * creates histogram outlining trading data
+	 * @param strategyFrequencies
+	 */
 	public void createBar(List<List<String>> strategyFrequencies) {
 		// strategyFrequenciesFormat: {{frequency, trader, strategy}, ...}
 		
@@ -90,9 +118,6 @@ public class DataVisualizationCreator {
 		LogAxis rangeAxis = new LogAxis("Actions(Buys or Sells)");
 		rangeAxis.setRange(new Range(0.1, 20.0));
 		plot.setRangeAxis(rangeAxis);
-
-		//plot.mapDatasetToRangeAxis(0, 0);// 1st dataset to 1st y-axis
-		//plot.mapDatasetToRangeAxis(1, 1); // 2nd dataset to 2nd y-axis
 
 		JFreeChart barChart = new JFreeChart("Actions Performed By Traders So Far", new 
 				Font("Serif", java.awt.Font.BOLD, 18), plot,true);
