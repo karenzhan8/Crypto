@@ -209,7 +209,11 @@ public class MainUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
-		// after perform trade, then start getting each selection broker
+		/* 
+		* performs trade by storing all current brokers in each row in a database, and performing a trade on each based on coins and strategy
+		* FACADE design enacted by sending all complex operations to other classes (i.e. executeTrade)
+		* complex back-end operations are masked, user only presented with "perform trade" button
+		*/
 		if ("refresh".equals(command)) { 
 			// stores database of brokers
 			UserSelection brokerDatabase = new UserSelection();
