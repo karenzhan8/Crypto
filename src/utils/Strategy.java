@@ -4,6 +4,10 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * Strategy class acts as 
+ * 
+ */
 public abstract class Strategy {
 	
 	private List<String> action;
