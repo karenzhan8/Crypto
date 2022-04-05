@@ -45,7 +45,7 @@ import utils.DataVisualizationCreator;
  * main method
  * utilizes singleton design pattern
  * is the SUBJECT for the DataVisualizationCreator class
- * behaves as a FACADE between user and other backend operations
+ * behaves as a FACADE between user and other backend operations such as trading strategies
  */
 public class MainUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
