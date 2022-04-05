@@ -13,8 +13,8 @@ public abstract class Subject {
 	    observers.remove(observer);
 	  }
 
-	  public void notifyObservers() {
+	  public void notifyObservers(List<List<String>> tableData, List<List<String>> histogramData) {
 	    for (Observer observer : observers)
-	      observer.update(this);
+	      observer.update(this, tableData, histogramData);
 	  }
-	}
+}

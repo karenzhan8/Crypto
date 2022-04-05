@@ -35,17 +35,30 @@ import gui.MainUI;
  * utilizes singleton design pattern
  * is an OBSERVER of the MainUI class
  */
-public class DataVisualizationCreator {
+public class DataVisualizationCreator implements Observer{
+	private static UpdateData subject;
 	private static DataVisualizationCreator instance;
 	
 	/**
-	 * mechanism for singleton design pattern
+	 * Constructor, utilizes singleton design pattern 
+	 * parameter subject to implement observer design pattern
+	 * @param subject
 	 */
-	private static DataVisualizationCreator getInstance() {
+	public DataVisualizationCreator (UpdateData subject) {
+		this.subject = subject;
+		subject.attach(this);
+		
+		//singleton design pattern
 		if (instance == null) {
-			instance = new DataVisualizationCreator();
+			instance = new DataVisualizationCreator(this.subject);
 		}
-		return instance;
+	}
+	
+	
+	@Override
+	public void update(Subject subject, List<List<String>> tableData, List<List<String>> histogramData) {
+		createCharts(tableData, histogramData);
+		
 	}
 	
 	/**
@@ -125,4 +138,5 @@ public class DataVisualizationCreator {
 		chartPanel.setBackground(Color.white);
 		MainUI.getInstance().updateStats(chartPanel);
 	}
+
 }

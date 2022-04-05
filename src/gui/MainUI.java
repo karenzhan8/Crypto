@@ -33,6 +33,7 @@ import javax.swing.table.TableColumn;
 import utils.AvailableCryptoList;
 import utils.DataVisualizationCreator;
 import utils.ExecuteTrade;
+import utils.UpdateData;
 import utils.User;
 import utils.UserSelection;
 
@@ -260,7 +261,8 @@ public class MainUI extends JFrame implements ActionListener {
 			cumulativeTrades.performTrade(brokerDatabase);
 			
 			stats.removeAll();
-			DataVisualizationCreator creator = new DataVisualizationCreator();
+			
+			UpdateData updater = new UpdateData();
 			
 			//set frequencies so histogram can be displayed
 			UserSelection.setFrequencies(brokerDatabase);
@@ -269,7 +271,7 @@ public class MainUI extends JFrame implements ActionListener {
 			List<List<String>> histoList = UserSelection.getFrequencies();
 			
 			//notify OBSERVERs that trading data is updated 
-			creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
+			updater.notifyObservers(cumulativeTrades.getCumulativeTrades(), histoList);
 			
 		//if user would like another row
 		} else if ("addTableRow".equals(command)) {
