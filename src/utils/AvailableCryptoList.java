@@ -14,24 +14,37 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * details crypto coins available for broker use
+ * usese singleton design pattern
+ */
+
 public class AvailableCryptoList {
 	private static AvailableCryptoList instance = null;
-	
 	private Map<String, String> tickerIDMap = new HashMap<>();
-	
 	private List<String> availableCryptosList = new ArrayList<>();
 	
+	/**
+	 * private method that allows for singleton design pattern
+	 * @return instance
+	 */
 	public static AvailableCryptoList getInstance() {
-		if (instance == null)
+		if (instance == null) {
 			instance = new AvailableCryptoList();
-		
+		}
 		return instance;
 	}
 	
+	/**
+	 * method finds available cryptos for trading
+	 */
 	private AvailableCryptoList() {
 		findAvailableCryptos();
 	}
 	
+	/**
+	 * calls API 
+	 */
 	public void call() {
 		String urlString = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=VNEY4VV2AWF1EB51";
 		try {
@@ -47,32 +60,20 @@ public class AvailableCryptoList {
 					inline += sc.nextLine();
 				}
 				sc.close();
-				System.out.println(inline);
-//				JsonArray jsonArray = new JsonParser().parse(inline).getAsJsonArray();
-//				int size = jsonArray.size();
-//				
-//				String name, id;
-//				for (int i = 0; i < size; i++) {
-//					JsonObject object = jsonArray.get(i).getAsJsonObject();
-//					name = object.get("name").getAsString();
-//					id = object.get("id").getAsString();
-//					
-//					availableCryptosMap.put(name, id);
-//					availableCryptosList.add(name);
-//				}
+				System.out.println(inline);			
 			}
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * finds available crypto coins
+	 */
 	private void findAvailableCryptos() {
-
-		String urlString = 
-				"https://api.coingecko.com/api/v3/coins/markets" + 
-						"?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
-//		ALPHAVANTAGE API KEY = VNEY4VV2AWF1EB51
+		String urlString = "https://api.coingecko.com/api/v3/coins/markets" + "?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
+		
+		//ALPHAVANTAGE API KEY = VNEY4VV2AWF1EB51
 		try {
 			URL url = new URL(urlString);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -108,12 +109,20 @@ public class AvailableCryptoList {
 		}
 	}
 	
+	/**
+	 * Returns string array of available cryptos
+	 * @return available cryptos
+	 */
 	public String[] getAvailableCryptos() {
 		return availableCryptosList.toArray(new String[availableCryptosList.size()]);
 	}
 	
+	/**
+	 * returns if coin is available
+	 * @param coinList
+	 * @return if coin is available
+	 */
 	public String coinAvailable(String[] coinList) {
-		
 		String[] availableCoins = availableCryptosList.toArray(new String[availableCryptosList.size()]);
 		
 		for (int i=0; i < coinList.length; i++) {
@@ -124,25 +133,12 @@ public class AvailableCryptoList {
 		return null;
 	}
 	
+	/**
+	 * returns ticker code for cryptocoin
+	 * @param tickerName
+	 * @return ticker 
+	 */
 	public String getCryptoIDfromTicker(String tickerName) {
 		return tickerIDMap.get(tickerName.toLowerCase());
 	}
-	
-	public static void main(String[] args) {
-		
-		AvailableCryptoList tester = new AvailableCryptoList();
-		tester.findAvailableCryptos();
-		
-		String[] testArray = tester.getAvailableCryptos();
-		
-		for (int i=0; i < testArray.length; i++) {
-			System.out.println(testArray[i]);
-		}
-		String[] coins = {"BTC"};
-		
-//		System.out.println("okay");
-//		System.out.println(tester.getCryptoIDfromTicker("BTC"));
-		
-	}
-
 }
