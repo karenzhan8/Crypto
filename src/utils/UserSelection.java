@@ -93,32 +93,7 @@ public class UserSelection {
 			return false;
 		}
 	}
-	
-	public void removeBroker(String name) {
-		if (containsBroker(brokerList,name)) {
-			int index = getIndex(brokerList, name);
-			
-			if (index != -1) {
-				strategyList.remove(index);
-				coinsList.remove(index);
-				brokerList.remove(index);
-				numBrokers--;
-			}
-			
-		} else {
-			System.out.println("Broker not in list");
-		}
-	}
-	
-	private int getIndex (ArrayList<Broker> brokerList, String name) {
-		for (int i = 0; i < brokerList.size(); i++) {
-			if (brokerList.get(i).getName().equals(name)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	
+		
     public ArrayList<Broker> getBrokerList() {
         return brokerList;
     }
