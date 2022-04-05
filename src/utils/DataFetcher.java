@@ -12,12 +12,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class DataFetcher {
-	
-	/*
-	 *  accesses coinGecko API to retrieve coin prices
-	 *  @param id used to find coin in coinGecko database
-	 *  @param date finds coin price for current date
-	 */
 	private JsonObject getDataForCrypto(String id, String date) {
 		String urlString = String.format("https://api.coingecko.com/api/v3/coins/%s/history?date=%s", id, date);
 		
@@ -44,9 +38,6 @@ public class DataFetcher {
 		return null;
 	}
 	
-	/*
-	 *  @return price of coin given it's id and the current date
-	 */
 	public double getPriceForCoin(String id, String date) {
 		double price = 0.0;
 		
@@ -60,9 +51,6 @@ public class DataFetcher {
 		return price;
 	}
 	
-	/*
-	 * @return coin market cap given it's id (to locate it in coinGecko database) on the current date
-	 */
 	public double getMarketCapForCoin(String id, String date) {
 		double marketCap = 0.0;
 		
@@ -76,9 +64,6 @@ public class DataFetcher {
 		return marketCap;
 	}
 	
-	/*
-	 * @return coin volume given it's id on the current date
-	 */
 	public double getVolumeForCoin(String id, String date) {
 		double volume = 0.0;
 		
