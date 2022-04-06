@@ -114,6 +114,14 @@ public class DataVisualizationCreator implements Observer{
 		table.setFillsViewportHeight(true);;
 		
 		MainUI.getInstance().updateStats(scrollPane);
+		
+		// displays an error message stating if a trade strategy cannot be applied
+		for (int i=0; i < data.length; i++) {
+			List<String> currLine = tradeActions.get(i);
+			if (currLine.get(2).equals("Fail")) {
+				JOptionPane.showMessageDialog(MainUI.getInstance(), currLine.get(1) + " cannot be applied to the following trader: " + currLine.get(0), "Strategy Error", JOptionPane.WARNING_MESSAGE);
+			};
+		}
 	}
 	
 	/**
