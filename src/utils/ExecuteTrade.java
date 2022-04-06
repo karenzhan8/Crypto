@@ -3,6 +3,8 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import strategy.TradeStrategy;
+
 /*
  *  contains a cumulative list of all trade actions performed thus far, updated after every trade performed;
  *  each time a trade is performed:
@@ -33,6 +35,7 @@ public class ExecuteTrade {
 			
 			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
 		
+			System.out.println("RESULT: " + tradeResult.size());
 			if (tradeResult.size() == 7) {
 				cumulativeTrades.add(tradeResult);
 			};

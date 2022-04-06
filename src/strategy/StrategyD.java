@@ -1,6 +1,8 @@
-package utils;
+package strategy;
 
 import java.util.*;
+
+import utils.DataFetcher;
 
 public class StrategyD extends Strategy {
 	public StrategyD(String[] coins, List<Double> prices, String name, String strategy) {

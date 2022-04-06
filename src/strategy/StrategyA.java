@@ -1,6 +1,8 @@
-package utils;
+package strategy;
 
 import java.util.*;
+
+import utils.DataFetcher;
 
 public class StrategyA extends Strategy {
 	

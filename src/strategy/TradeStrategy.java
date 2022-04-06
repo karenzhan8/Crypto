@@ -1,9 +1,11 @@
-package utils;
+package strategy;
 
-import java.io.*;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import utils.AvailableCryptoList;
+import utils.DataFetcher;
 
 /** 
  * Class implements different trading strategies based on user input

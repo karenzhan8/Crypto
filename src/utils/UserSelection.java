@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gui.MainUI;
+import strategy.TradeStrategy;
 
 /**
  * communicates with GUI. Allows users to add brokers and store broker data

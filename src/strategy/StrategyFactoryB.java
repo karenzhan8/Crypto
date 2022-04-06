@@ -1,20 +1,20 @@
-package utils;
+package strategy;
 
 import java.util.List;
-
 /**
- * Strategy factory A creates Strategy A
+ * Strategy factory B creates Strategy B
  */
-public class StrategyFactoryA extends StrategyFactory {
+
+public class StrategyFactoryB extends StrategyFactory {
 	@Override
 	/**
 	 * @param strategy
 	 * @param coins
 	 * @param prices
 	 * @param name
-	 * @return Strategy A object
+	 * @return Strategy B object
 	 */
 	public Strategy doStrategy(String strategy, String[] coins, List<Double> prices, String name) {
-		return new StrategyA(coins, prices, name, strategy);
+		return new StrategyB(coins, prices, name, strategy);
 	}
 }
