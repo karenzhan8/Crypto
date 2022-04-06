@@ -44,9 +44,16 @@ import javax.swing.JLabel;
 // renders charts
 import utils.DataVisualizationCreator;
 
+/**
+ * Created to implement facade design pattern
+ */
 public class Facade {
 	private static Facade instance;
 
+	/**
+	 * Uses singleton design pattern
+	 * @return instance
+	 */
 	public static Facade getInstance() {
 		if (instance == null) {
 			instance = new Facade();
@@ -54,7 +61,12 @@ public class Facade {
 		return instance;
 	}
 	
-	
+	/**
+	 * refreshes mainui
+	 * @param dtm
+	 * @param cumulativeTrades
+	 * @param stats
+	 */
 	public void refresh(DefaultTableModel dtm, ExecuteTrade cumulativeTrades, JPanel stats) {
 		UserSelection brokerDatabase = new UserSelection();
 		
@@ -93,7 +105,6 @@ public class Facade {
 			if (!add) {
 				JOptionPane.showMessageDialog(MainUI.getInstance(), "repeat broker name added, please change name on line " + (count + 1) + "!");
 				return;
-				
 			}
 		}
 		
@@ -113,14 +124,21 @@ public class Facade {
 		
 		//notify OBSERVERs that trading data is updated 
 		updater.notifyObservers(cumulativeTrades.getCumulativeTrades(), histoList);
-		
-	//if user would like another row
 	}
 	
+	/**
+	 * Method allows user to add row
+	 * @param dtm
+	 */
 	public void addRow(DefaultTableModel dtm) {
 		dtm.addRow(new String[3]); 
 	}
 	
+	/**
+	 * Method allows user to remove row 
+	 * @param dtm
+	 * @param table
+	 */
 	public void removeRow(DefaultTableModel dtm, JTable table) {
 		int selectedRow = table.getSelectedRow();
 		if (selectedRow != -1) {
@@ -128,6 +146,14 @@ public class Facade {
 		}
 	}
 	
+	/**
+	 * Verifies user log in
+	 * @param credentials
+	 * @param username
+	 * @param password
+	 * @param loginFrame
+	 * @param frame
+	 */
 	public void login(boolean credentials, JTextField username, JPasswordField password, JFrame loginFrame, JFrame frame) {
 		/* 
 		* verify that user credentials are correct

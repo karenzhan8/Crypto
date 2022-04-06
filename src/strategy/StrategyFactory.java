@@ -3,7 +3,7 @@ package strategy;
 import java.util.*;
 
 /** 
- * class acts as as abstract for all other factory classes
+ * Acts as as abstract class for all other factory classes
  */
 public abstract class StrategyFactory {
 	/**

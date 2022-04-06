@@ -4,7 +4,18 @@ import java.util.*;
 
 import utils.DataFetcher;
 
+/**
+ * Strategy D, purchase 100 FTM if ADA > FTM, otherwise buy 100 ADA
+ * Part of factory design pattern
+ */
 public class StrategyD extends Strategy {
+	/**
+	 * Informs execution of trade strategy
+	 * @param coins
+	 * @param prices
+	 * @param name
+	 * @param strategy
+	 */
 	public StrategyD(String[] coins, List<Double> prices, String name, String strategy) {
 		
 		super (strategy, coins, prices, name);

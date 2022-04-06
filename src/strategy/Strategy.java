@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Strategy class acts as 
- * 
+ * Class allows implementation of factory design pattern
+ * Acts as abstract class for Strategy A, B, C, D
  */
 public abstract class Strategy {
 	private List<String> action;

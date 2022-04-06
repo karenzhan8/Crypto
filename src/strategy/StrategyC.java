@@ -4,8 +4,18 @@ import java.util.*;
 
 import utils.DataFetcher;
 
+/**
+ * Strategy C, purchase 200 FTM if ETH > 38000 and ADA < 1, otherwise sell 500 ADA
+ * Part of factory design pattern
+ */
 public class StrategyC extends Strategy {
-	
+	/**
+	 * Informs execution of trade strategy
+	 * @param coins
+	 * @param prices
+	 * @param name
+	 * @param strategy
+	 */
 	public StrategyC(String[] coins, List<Double> prices, String name, String strategy) {
 
 		super (strategy, coins, prices, name);

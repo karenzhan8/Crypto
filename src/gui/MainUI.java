@@ -169,18 +169,30 @@ public class MainUI extends JFrame implements ActionListener {
 		getContentPane().add(south, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * method updates stats 
+	 * @param component
+	 */
 	public void updateStats(JComponent component) {
 		stats.add(component);
 		stats.revalidate();
 	}
-
+	
+	/**
+	 * main method 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		frame = MainUI.getInstance();
 		frame.setSize(900, 600);
 		frame.pack();
 		loginFrame.setVisible(true);
 	}
-
+	
+	/**
+	 * allows UI to respond to user actions
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();

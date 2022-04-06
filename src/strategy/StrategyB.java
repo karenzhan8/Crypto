@@ -4,8 +4,18 @@ import java.util.*;
 
 import utils.DataFetcher;
 
+/**
+ * Strategy B, purchase 10 LUNA if ADA > 1, otherwise sell 3 BTC
+ * Part of factory design pattern
+ */
 public class StrategyB extends Strategy {
-	
+	/**
+	 * Informs execution of trade strategy
+	 * @param coins
+	 * @param prices
+	 * @param name
+	 * @param strategy
+	 */
 	public StrategyB(String[] coins, List<Double> prices, String name, String strategy) {
 
 		super (strategy, coins, prices, name);

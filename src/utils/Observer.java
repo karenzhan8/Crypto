@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * Observer interface for observer design pattern 
  */
-
 interface Observer {
 	/**
 	 * Update method so data can be drawn

@@ -11,7 +11,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * Class interacts with API to retrieve crypto coin prices
+ */
 public class DataFetcher {
+	/**
+	 * Makes API call
+	 * @param id
+	 * @param date
+	 * @return JsonObject storing coin information 
+	 */
 	private JsonObject getDataForCrypto(String id, String date) {
 		String urlString = String.format("https://api.coingecko.com/api/v3/coins/%s/history?date=%s", id, date);
 		
@@ -32,12 +41,16 @@ public class DataFetcher {
 				return jsonObject;
 			}
 
-		} catch (IOException e) {
-			System.out.println("Something went wrong with the API call.");
-		}
+		} catch (IOException e) {}
 		return null;
 	}
 	
+	/**
+	 * Returns price of coin at specific date
+	 * @param id
+	 * @param date
+	 * @return price
+	 */
 	public double getPriceForCoin(String id, String date) {
 		double price = 0.0;
 		

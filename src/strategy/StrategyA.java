@@ -4,10 +4,19 @@ import java.util.*;
 
 import utils.DataFetcher;
 
+/**
+ * Strategy A, purchase 800 ADA if BTC > 58000 & ETH < 4000, otherwise sell 2 BTC
+ * Part of factory design pattern
+ */
 public class StrategyA extends Strategy {
-	
+	/**
+	 * Informs execution of trade strategy
+	 * @param coins
+	 * @param prices
+	 * @param name
+	 * @param strategy
+	 */
 	public StrategyA(String[] coins, List<Double> prices, String name, String strategy) {
-		
 		super (strategy, coins, prices, name);
 		
 		List<String> execution = new ArrayList<String>();
@@ -51,5 +60,4 @@ public class StrategyA extends Strategy {
 		execution.add(date());
 		setExecution(execution);
 	}
-	
 }
