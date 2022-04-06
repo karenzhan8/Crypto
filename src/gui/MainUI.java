@@ -36,6 +36,7 @@ import utils.ExecuteTrade;
 import utils.UpdateData;
 import utils.User;
 import utils.UserSelection;
+import utils.Facade;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -209,6 +210,7 @@ public class MainUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+		Facade info = Facade.getInstance();
 		
 		/**
 		* performs trade by storing all current brokers in each row in a database, and performing a trade on each based on coins and strategy
@@ -216,106 +218,13 @@ public class MainUI extends JFrame implements ActionListener {
 		* complex back-end operations are masked, user only presented with "perform trade" button and trade results
 		*/
 		if ("refresh".equals(command)) { 
-			// stores database of brokers
-			UserSelection brokerDatabase = new UserSelection();
-			
-			for (int count = 0; count < dtm.getRowCount(); count++){
-				Object traderObject = dtm.getValueAt(count, 0); 
-				if (traderObject == null) {
-					JOptionPane.showMessageDialog(this, "please fill in Trader name on line " + (count + 1) );
-					return;
-				}
-				String traderName = traderObject.toString();
-
-				Object coinObject = dtm.getValueAt(count, 1); 
-				if (coinObject == null) {
-					JOptionPane.showMessageDialog(this, "please fill in cryptocoin list on line " + (count + 1) );
-					return;
-				}
-				String[] coinNames = coinObject.toString().split(","); // list of coins
-				// ensures AvailableCryptoList can properly read the ticker symbol
-				for (int i=0; i < coinNames.length; i++) {
-					coinNames[i] = coinNames[i].trim();
-				}
-				Object strategyObject = dtm.getValueAt(count, 2);
-				if (strategyObject == null) {
-					JOptionPane.showMessageDialog(this, "please fill in strategy name on line " + (count + 1) );
-					return;
-				} else {
-						String ticker = AvailableCryptoList.getInstance().coinAvailable(coinNames);
-					if (ticker != null) {
-						JOptionPane.showMessageDialog(this, "the following coin is not valid: " + ticker + " on line " + (count + 1) );
-						return;
-					}
-				}
-				String strategyName = strategyObject.toString(); // strategy name string
-				boolean add = brokerDatabase.addBroker(traderName, strategyName, coinNames);
-				
-				if (!add) {
-					JOptionPane.showMessageDialog(this, "repeat broker name added, please change name on line " + (count + 1) + "!");
-					return;
-					
-				}
-			}
-			
-			cumulativeTrades.performTrade(brokerDatabase);
-			
-			stats.removeAll();
-			
-			//add observer (DataVisualizationCreator) to subject (UpdateData)
-			//draws table and histo
-			UpdateData updater = new UpdateData();
-			DataVisualizationCreator creator = new DataVisualizationCreator(updater);
-			updater.attach(creator);
-			
-			//set frequencies so histogram can be displayed
-			UserSelection.setFrequencies(brokerDatabase);
-			List<List<String>> histoList = UserSelection.getFrequencies();
-			
-			//notify OBSERVERs that trading data is updated 
-			updater.notifyObservers(cumulativeTrades.getCumulativeTrades(), histoList);
-			
-		//if user would like another row
+			info.refresh(dtm, cumulativeTrades, stats);
 		} else if ("addTableRow".equals(command)) {
-			dtm.addRow(new String[3]); 
-			
+			info.addRow(dtm);
 		} else if ("remTableRow".equals(command)) {
-			int selectedRow = table.getSelectedRow();
-			if (selectedRow != -1) {
-				dtm.removeRow(selectedRow); // connect to remove the selected row data from here (THIS IS PERFORMED AFTER TRADE BUTTON HIT)
-			}
-			
+			info.removeRow(dtm, table);
 		} else if ("Login".equals(command)) {
-			/* 
-			* verify that user credentials are correct
-			* FACADE pattern implemented, masking back-end operations required to verify username and password
-			* user input sent to User class for verification
-			*/
-			User info = User.getInstance();
-			
-			//get user input 
-			String user = username.getText();
-			String pass = password.getText();
-
-			credentials = info.verify(user, pass);
-			
-			//display success/failure to user
-			if (!credentials) {
-				loginFrame.setVisible(false);
-				JOptionPane.showMessageDialog(this, "Log in failed, system will terminate!");
-			}	
-			
-			//hide log in window, whether or not user log in was successful
-			loginFrame.setVisible(false);
-			
-			if (credentials) {
-				frame.setVisible(true);
-			}
-			else {
-				//exit system
-				System.exit(1);
-			}
-			return;
+			info.login(credentials, username, password, loginFrame, frame);
 		}
 	}
 }
