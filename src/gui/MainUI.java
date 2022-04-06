@@ -5,11 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -20,28 +15,19 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import utils.AvailableCryptoList;
-import utils.DataVisualizationCreator;
 import utils.ExecuteTrade;
-import utils.UpdateData;
-import utils.User;
 import utils.UserSelection;
 import utils.Facade;
 
 import javax.swing.JTextField;
-import javax.swing.JLabel;
-// renders charts
-import utils.DataVisualizationCreator;
 
 /**
  * main method
@@ -53,20 +39,8 @@ public class MainUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private static MainUI instance;
-	private JPanel stats, chartPanel, tablePanel;
+	private JPanel stats;
 
-	// Should be a reference to a separate object in actual implementation
-	private List<String> selectedList;
-
-	private JTextArea selectedTickerList;
-	//private JTextArea tickerList;
-	private JTextArea tickerText;
-	private JTextArea BrokerText;
-	private JComboBox<String> strategyList;
-	private Map<String, List<String>> brokersTickers = new HashMap<>();
-	private Map<String, String> brokersStrategies = new HashMap<>();
-	private List<String> selectedTickers = new ArrayList<>();
-	private String selectedStrategy = "";
 	private DefaultTableModel dtm;
 	private JTable table;
 	

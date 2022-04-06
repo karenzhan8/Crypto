@@ -35,7 +35,6 @@ public class ExecuteTrade {
 			
 			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
 		
-			System.out.println("RESULT: " + tradeResult.size());
 			if (tradeResult.size() == 7) {
 				cumulativeTrades.add(tradeResult);
 			};
